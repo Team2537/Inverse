@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     driveSys = new DriveSubsystem();
-    xbox = new XboxController(0);
+    xbox = new XboxController(1);
   }
 
   /**
@@ -40,12 +40,7 @@ public class Robot extends TimedRobot {
    * SmartDashboard integrated updating.
    */
   @Override
-  public void robotPeriodic() {
-    driveSys.setLeftTalons(xbox.getY(Hand.kLeft));
-    driveSys.setRightTalons(xbox.getY(Hand.kRight));
-
-    DriveSubsystem.displayEncoderValues();
-  }
+  public void robotPeriodic() {}
 
   /**
    * This autonomous (along with the chooser code above) shows how to select between different
@@ -73,7 +68,10 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    driveSys.setLeftTalons(xbox.getRawAxis(1) * 0.25);
+    driveSys.setRightTalons(xbox.getRawAxis(5) * 0.25);
+  }
 
   /** This function is called once when the robot is disabled. */
   @Override

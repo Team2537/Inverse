@@ -15,14 +15,16 @@ public class DriveSubsystem extends SubsystemBase {
     public DriveSubsystem() {
 
         backLeftTalon = new TalonSRX(0);
-        backRightTalon = new TalonSRX(2);
+        backRightTalon = new TalonSRX(1);
 
         controlMode = ControlMode.PercentOutput;
         feedbackDevice = FeedbackDevice.QuadEncoder;
 
         backLeftTalon.configSelectedFeedbackSensor(feedbackDevice, 0, 0);
         backRightTalon.configSelectedFeedbackSensor(feedbackDevice, 0, 0);
-
+        
+        backLeftTalon.setInverted(true);
+        backRightTalon.setInverted(false);
     }
 
     public void setLeftTalons(double speed) {
