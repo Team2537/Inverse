@@ -19,7 +19,7 @@ import frc.robot.driveSys.DriveSubsystem;
  */
 public class Robot extends TimedRobot {
   
-  DriveSubsystem driveSys;
+  public static DriveSubsystem driveSys;
   XboxController xbox;
 
   /**
@@ -41,8 +41,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    DriveSubsystem.setLeftTalons(xbox.getY(Hand.kLeft));
-    DriveSubsystem.setRightTalons(xbox.getY(Hand.kRight));
+    driveSys.setLeftTalons(xbox.getY(Hand.kLeft));
+    driveSys.setRightTalons(xbox.getY(Hand.kRight));
 
     DriveSubsystem.displayEncoderValues();
   }
