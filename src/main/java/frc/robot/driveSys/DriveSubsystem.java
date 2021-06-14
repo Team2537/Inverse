@@ -25,15 +25,15 @@ public class DriveSubsystem extends SubsystemBase {
 
     }
 
-    public static void setLeftTalons(double speed) {
+    public void setLeftTalons(double speed) {
         backLeftTalon.set(controlMode, speed);
     }
 
-    public static void setRightTalons(double speed) {
+    public void setRightTalons(double speed) {
         backRightTalon.set(controlMode, speed);
     }
 
-    public static void setTalons(double speed) {
+    public void setTalons(double speed) {
         setLeftTalons(speed);
         setRightTalons(speed);
     }
@@ -54,7 +54,14 @@ public class DriveSubsystem extends SubsystemBase {
         System.out.println("Back Right Encoder Value: " + getBackRightEncoder());
     }
     
+    public void stopMotors(){
+        setTalons(0);
+    }
     //get encoder distances
 
+    public void resetEncoders(){
+        backLeftTalon.setSelectedSensorPosition(0);
+        backRightTalon.setSelectedSensorPosition(0);
+    }
 
 }
