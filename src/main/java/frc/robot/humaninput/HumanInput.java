@@ -11,7 +11,7 @@ public class HumanInput {
 
     public HumanInput() {
         xbox = new XboxController(1);
-        laserButton = new JoystickButton(xbox, 3);
+        laserButton = new JoystickButton(xbox, 4);
     }
 
 

@@ -5,9 +5,10 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LaserSubsystem extends SubsystemBase {
-    private DigitalOutput laser = new DigitalOutput(0);
+    private DigitalOutput laser = new DigitalOutput(1);
     private Servo motorServo = new Servo(1);
-    public LaserSubsystem(){}
+
+    public LaserSubsystem() {}
 
     public void setServo(double value) {
         motorServo.set(value);

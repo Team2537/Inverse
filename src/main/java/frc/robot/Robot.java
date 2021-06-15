@@ -4,10 +4,13 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.humaninput.HumanInput;
+import frc.robot.laser.LaserCommand;
 import frc.robot.laser.LaserSubsystem;
 
 /**
@@ -23,6 +26,7 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   public static HumanInput input = new HumanInput();
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -80,11 +84,17 @@ public class Robot extends TimedRobot {
 
   /** This function is called once when teleop is enabled. */
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    //CommandScheduler.getInstance().schedule(new LaserCommand());
+    
+  }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    //CommandScheduler.getInstance().run();
+
+  }
 
   /** This function is called once when the robot is disabled. */
   @Override
