@@ -6,12 +6,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.driveSys.DriveSubsystem;
 import frc.robot.humaninput.HumanInput;
 import frc.robot.laser.LaserCommand;
 import frc.robot.laser.LaserSubsystem;
+import frc.robot.nav.RotateCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -22,6 +25,9 @@ import frc.robot.laser.LaserSubsystem;
 public class Robot extends TimedRobot {
 
   public static LaserSubsystem laserSys = new LaserSubsystem();
+  public static DriveSubsystem driveSys = new DriveSubsystem();
+
+  XboxController xbox = new XboxController(1);
 
   public static HumanInput input = new HumanInput();
 
@@ -59,20 +65,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    
+    CommandScheduler.getInstance().schedule(new RotateCommand(90));
   }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    
+    CommandScheduler.getInstance().run();
   }
 
   /** This function is called once when teleop is enabled. */
   @Override
   public void teleopInit() {
     //CommandScheduler.getInstance().schedule(new LaserCommand());
-    
+    driveSys.periodic();
   }
 
   /** This function is called periodically during operator control. */
@@ -80,6 +86,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
 
+    
   }
 
   /** This function is called once when the robot is disabled. */

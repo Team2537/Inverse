@@ -1,8 +1,9 @@
 package frc.robot.laser;
 
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
+
 
 
 public class LaserCommand extends CommandBase {
