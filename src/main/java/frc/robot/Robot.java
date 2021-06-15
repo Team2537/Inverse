@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.humaninput.HumanInput;
 import frc.robot.laser.LaserSubsystem;
 
 /**
@@ -21,6 +22,7 @@ public class Robot extends TimedRobot {
   public static LaserSubsystem laserSys = new LaserSubsystem();
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  public static HumanInput input = new HumanInput();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -31,6 +33,8 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+
+    input.registerButtons();
   }
 
   /**

@@ -25,6 +25,6 @@ public class LaserSubsystem extends SubsystemBase {
     }
     @Override
     public void periodic() {
-        setDefaultCommand(new ServoMotorCommand(0));
+        //setDefaultCommand(new ServoMotorCommand(0));
     }
 }
