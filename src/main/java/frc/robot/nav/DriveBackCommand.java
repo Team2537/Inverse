@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 
-public class DriveStraightCommand extends CommandBase {
+public class DriveBackCommand extends CommandBase {
 
   
   private double currentAngle;
@@ -22,7 +22,7 @@ public class DriveStraightCommand extends CommandBase {
   private static final double SLOWING_DISTANCE = 50;
 
 
-  public DriveStraightCommand(double targetDistance) {
+  public DriveBackCommand(double targetDistance) {
     addRequirements(Robot.driveSys);
     this.targetDistance = targetDistance;
   }
@@ -36,7 +36,7 @@ public class DriveStraightCommand extends CommandBase {
       Robot.driveSys.resetEncoders();
 
       currentAngle = Navx.getInstance().getYaw();
-      remainingDistance = targetDistance - Robot.driveSys.getEncoderDistance();
+      remainingDistance = targetDistance + Robot.driveSys.getEncoderDistance();
 
       
       Robot.driveSys.setTalons(DEFAULT_PERCENT_OUTPUT);
@@ -47,7 +47,7 @@ public class DriveStraightCommand extends CommandBase {
   public void execute() {
       currentAngle = Navx.getInstance().getYaw();
       double power = DEFAULT_PERCENT_OUTPUT;
-      remainingDistance = targetDistance - Robot.driveSys.getEncoderDistance();
+      remainingDistance = targetDistance + Robot.driveSys.getEncoderDistance();
       System.out.println("Encoder" + Robot.driveSys.getEncoderDistance());
 
       if(remainingDistance <= SLOWING_DISTANCE) {
@@ -61,8 +61,8 @@ public class DriveStraightCommand extends CommandBase {
       }
       power = Math.max(Math.abs(power), MIN_PERCENT_OUTPUT);
 
-       Robot.driveSys.setLeftTalons((power - powerAdjustment) * percentOutputLeft);
-      Robot.driveSys.setRightTalons(power + powerAdjustment);
+       Robot.driveSys.setLeftTalons(-(power - powerAdjustment));
+      Robot.driveSys.setRightTalons(-(power + powerAdjustment));
       
   }
 

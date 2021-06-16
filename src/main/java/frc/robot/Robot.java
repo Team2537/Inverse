@@ -14,6 +14,7 @@ import frc.robot.driveSys.DriveSubsystem;
 import frc.robot.humaninput.HumanInput;
 import frc.robot.laser.LaserCommand;
 import frc.robot.laser.LaserSubsystem;
+import frc.robot.nav.DriveStraightCommand;
 import frc.robot.nav.RotateCommand;
 
 /**
@@ -63,9 +64,12 @@ public class Robot extends TimedRobot {
    * below with additional strings. If using the SendableChooser make sure to add them to the
    * chooser code above as well.
    */
+
+   double start;
+
   @Override
   public void autonomousInit() {
-    CommandScheduler.getInstance().schedule(new RotateCommand(90));
+    CommandScheduler.getInstance().schedule(new DriveStraightCommand(36));
   }
 
   /** This function is called periodically during autonomous. */

@@ -12,7 +12,7 @@ public class DriveSubsystem extends SubsystemBase {
     private static TalonSRX backLeftTalon, backRightTalon;
     private static ControlMode controlMode;
     private static FeedbackDevice feedbackDevice;
-    private static final double WHEEL_DIAMETER = 8;
+    private static final double WHEEL_DIAMETER = 8.25;
     private static final double ENC_ROTATION = 1440;
     private static final double PERCENT_OUTPUT = 0.5;
 
@@ -27,8 +27,8 @@ public class DriveSubsystem extends SubsystemBase {
         backLeftTalon.configSelectedFeedbackSensor(feedbackDevice, 0, 0);
         backRightTalon.configSelectedFeedbackSensor(feedbackDevice, 0, 0);
 
-        backLeftTalon.setInverted(true);
-        backRightTalon.setInverted(false);
+        backLeftTalon.setInverted(false);
+        backRightTalon.setInverted(true);
     }
 
     public void setLeftTalons(double speed) {
@@ -64,19 +64,22 @@ public class DriveSubsystem extends SubsystemBase {
     }
     
     public void stopMotors() {
-        setTalons(0);
+        backLeftTalon.set(ControlMode.Disabled, 0);
+        backRightTalon.set(ControlMode.Disabled, 0);
+
     }
     //get encoder distances
     public double getEncoderDistance() {
         double avgEncoders = (getBackLeftEncoder() + getBackRightEncoder()) / 2;
-        double distance = avgEncoders * WHEEL_DIAMETER * Math.PI / ENC_ROTATION;
+        //double distance = avgEncoders * WHEEL_DIAMETER * Math.PI / ENC_ROTATION;
+        double distance = avgEncoders / 53.5;
         return distance;
 
     }
 
     public void teleopDrive() {
-        setLeftTalons(Robot.input.getLeftJoystick() * PERCENT_OUTPUT);
-        setRightTalons(Robot.input.getRightJoystick() * PERCENT_OUTPUT);
+        setLeftTalons(-Robot.input.getLeftJoystick() * PERCENT_OUTPUT);
+        setRightTalons(-Robot.input.getRightJoystick() * PERCENT_OUTPUT);
     }
 
     @Override

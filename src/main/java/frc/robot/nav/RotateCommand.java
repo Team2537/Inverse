@@ -12,10 +12,10 @@ public class RotateCommand extends CommandBase {
   private double currentAngle;
   private double targetAngle;
   private double deltaAngle;
-  private static final double DEFAULT_PERCENT_OUTPUT = 0.25;
+  private static final double DEFAULT_PERCENT_OUTPUT = 0.35;
   private static final double MIN_PERCENT_OUTPUT = 0.1;
-  private static final double ANGLE_kP = 0.70;
-	private static final double TOLERANCE = 10; // degrees
+  private static final double ANGLE_kP = 1.4;
+	private static final double TOLERANCE = 1; // degrees
 
   public RotateCommand(double angle) {
     addRequirements(Robot.driveSys);
@@ -43,8 +43,8 @@ public class RotateCommand extends CommandBase {
       power = Math.max(Math.abs(power), Math.abs(MIN_PERCENT_OUTPUT)) * Math.signum(power);
 
      
-      Robot.driveSys.setLeftTalons(-power * Math.signum(deltaAngle));
-      Robot.driveSys.setRightTalons(power * Math.signum(deltaAngle));
+      Robot.driveSys.setLeftTalons(power * Math.signum(deltaAngle));
+      Robot.driveSys.setRightTalons(-power * Math.signum(deltaAngle));
       System.out.println(deltaAngle);
       SmartDashboard.putNumber("delta angle", deltaAngle);
       SmartDashboard.putNumber("Yaw", Navx.getInstance().getYaw());

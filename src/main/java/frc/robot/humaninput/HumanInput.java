@@ -4,19 +4,21 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.laser.LaserCommand;
+import frc.robot.nav.DriveBackCommand;
 import frc.robot.nav.DriveStraightCommand;
 import frc.robot.nav.RotateCommand;
 
 public class HumanInput {
     
     XboxController xbox;
-    private static JoystickButton laserButton, rotateButton, driveStraightButton;
+    private static JoystickButton laserButtonY, rotateButtonA, driveStraightButtonB, driveBackButtonX;
 
     public HumanInput() {
         xbox = new XboxController(1);
-        laserButton = new JoystickButton(xbox, 4);
-        rotateButton = new JoystickButton(xbox, 1);
-        driveStraightButton = new JoystickButton(xbox, 2);
+        laserButtonY = new JoystickButton(xbox, 4);
+        rotateButtonA = new JoystickButton(xbox, 1);
+        driveStraightButtonB = new JoystickButton(xbox, 2);
+        driveBackButtonX = new JoystickButton(xbox, 3);
     }
 
     public double getLeftJoystick() {
@@ -28,9 +30,10 @@ public class HumanInput {
     }
 
     public void registerButtons() {
-        laserButton.whenPressed(new LaserCommand());
-        rotateButton.whenPressed(new RotateCommand(90));
-        driveStraightButton.whenPressed(new DriveStraightCommand(30));
+        laserButtonY.whenPressed(new LaserCommand());
+        rotateButtonA.whenPressed(new RotateCommand(90));
+        driveStraightButtonB.whenPressed(new DriveStraightCommand(20));
+        driveBackButtonX.whenPressed(new DriveBackCommand(20));
 
     }
 
